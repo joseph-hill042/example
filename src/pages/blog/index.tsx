@@ -1,15 +1,16 @@
 import * as React from 'react';
 import {graphql, HeadFC, Link, PageProps} from "gatsby";
-import Layout from "../components/layout";
-import SEO from "../components/seo";
+import Layout from "../../components/layout";
+import SEO from "../../components/seo";
 
 const BlogPage: React.FC<PageProps> = ({data}) => {
+    // @ts-ignore
+    const {nodes}: any = data.allMdx;
     return (
         <Layout pageTitle={"My Blog Posts"}>
             <ul>
                 {
-                    //@ts-ignore
-                    data.allMdx.nodes.map((node) => (
+                    nodes.map((node: any) => (
                         <article key={node.id}>
                             <h2>
                                 <Link to={`/blog/${node.frontmatter.slug}`}>
