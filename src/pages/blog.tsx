@@ -3,17 +3,18 @@ import {graphql, HeadFC, PageProps} from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
-const isBlogPost = (node: any): boolean => node.sourceInstanceName === "blog";
 const BlogPage: React.FC<PageProps> = ({data}) => {
     return (
         <Layout pageTitle={"My Blog Posts"}>
             <ul>
                 {
-                    // @ts-ignore
-                    data.allFile.nodes.filter(isBlogPost).map((node: any) => (
-                        <li key={node.name}>
-                            {node.name}
-                        </li>
+                    //@ts-ignore
+                    data.allMdx.nodes.map((node) => (
+                        <article key={node.id}>
+                            <h2>{node.frontmatter.title}</h2>
+                            <p>Posted: {node.frontmatter.date}</p>
+                            <p>{node.excerpt}</p>
+                        </article>
                     ))
                 }
             </ul>
@@ -23,14 +24,19 @@ const BlogPage: React.FC<PageProps> = ({data}) => {
 
 export const query = graphql`
   query {
-    allFile {
+    allMdx(sort: { frontmatter: { date: DESC }}) {
       nodes {
-        name
-        sourceInstanceName
+        frontmatter {
+          date(formatString: "MMMM D, YYYY")
+          title
+        }
+        id
+        excerpt
       }
     }
   }
 `
+
 
 export const Head: HeadFC = () => <SEO title={"My Blog Posts"} />
 export default BlogPage;
