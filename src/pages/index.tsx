@@ -1,6 +1,7 @@
 import * as React from "react"
 import type {HeadFC, PageProps} from "gatsby";
 import Layout from "../components/layout";
+import SEO from "../components/seo";
 import {StaticImage} from "gatsby-plugin-image";
 
 const IndexPage: React.FC<PageProps> = () => {
@@ -17,4 +18,4 @@ const IndexPage: React.FC<PageProps> = () => {
 
 export default IndexPage
 
-export const Head: HeadFC = () => <title>Home Page</title>
+export const Head: HeadFC = () => <SEO title={"Home Page"} />

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {Link} from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 
 type LayoutProps  = {
     pageTitle: string
@@ -30,9 +30,26 @@ const navLinkText: {color: string} = {
     color: "black"
 }
 
+const siteTitle: {fontSize: string, color: string, fontWeight: number, margin: string} = {
+    fontSize: "3rem",
+    color: "gray",
+    fontWeight: 700,
+    margin: "3rem 0"
+}
+
 const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
+    const data = useStaticQuery(graphql`
+        query {
+            site {
+                siteMetadata {
+                    title
+                }
+            }
+        }
+    `)
     return (
         <div style={container}>
+            <header style={siteTitle}>{data.site.siteMetadata.title}</header>
             <nav>
                 <ul style={navLinks}>
                     <li style={navLinkItem}>
@@ -43,6 +60,11 @@ const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
                     <li style={navLinkItem}>
                         <Link to="/about" style={navLinkText}>
                             About
+                        </Link>
+                    </li>
+                    <li style={navLinkItem}>
+                        <Link to="/blog" style={navLinkText}>
+                            Blog
                         </Link>
                     </li>
                 </ul>
