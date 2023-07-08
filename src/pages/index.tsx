@@ -1,8 +1,8 @@
-import * as React from "react"
-import type {HeadFC, PageProps} from "gatsby";
+import * as React from "react";
+import type { HeadFC, PageProps } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import {StaticImage} from "gatsby-plugin-image";
+import { StaticImage } from "gatsby-plugin-image";
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -11,11 +11,10 @@ const IndexPage: React.FC<PageProps> = () => {
       <StaticImage
         alt="Konrad Curze - Primarch of the Night Lords"
         src={"../images/konrad-curze.jpg"}
-        />
+      />
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
-
-export const Head: HeadFC = () => <SEO title={"Home Page"} />
+export const Head: HeadFC = () => <SEO title={"Home Page"} />;
+export default IndexPage;
